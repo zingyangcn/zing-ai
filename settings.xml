@@ -1,0 +1,23 @@
+<settings>
+    <servers>
+        <server>
+            <id>zingyang-maven</id>
+            <username>cnb</username>
+            <password>eJXKpLpSmiJnYi11846q6Pa25UD</password> <!-- 请替换为您的访问令牌 -->
+        </server>
+    </servers>
+    <profiles>
+        <profile>
+            <id>zingyang-maven-profile</id>
+            <repositories>
+                <repository>
+                    <id>zingyang-maven</id>
+                    <url>https://maven.cnb.cool/zingyang/maven/-/packages/</url>
+                </repository>
+            </repositories>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
+</settings>

@@ -24,4 +24,15 @@
         </dependency>
     </dependencies>
 
+
+    <!-- 配置发布仓库 -->
+    <distributionManagement>
+        <repository>
+            <!--必须与 settings.xml 的 id 一致-->
+            <id>zingyang-maven</id>
+            <name>zingyang-maven</name>
+            <url>https://maven.cnb.cool/zingyang/maven/-/packages/</url>
+        </repository>
+    </distributionManagement>
+
 </project>
