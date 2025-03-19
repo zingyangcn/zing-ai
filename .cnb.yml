@@ -1,0 +1,28 @@
+main:
+  push:
+    - runner:
+        cpus: 4
+    - name: 构建
+      docker:
+        image: maven:3.8-eclipse-temurin-17
+        volumes:
+          - /root/.m2:copy-on-write
+      stages:
+        - name: 安装环境
+          script:
+            - java -version
+        - name: 编译
+          script:
+            - mvn -B clean package -Dmaven.test.skip=true -Dautoconfig.skip -P prod
+            - ls
+        # - name: 打包产物
+        #   script:
+        #     - cd jeecg-module-system/jeecg-system-start/target
+        #     - tar -cvf zing-server.tar.gz jeecg-system-start-3.7.2.jar
+        # - name: 查看产物
+        #   script:
+        #     - ls
+        # - name: 推送
+        #   script: curl -H "X-Artifact-Checksum-Sha256:zing" -T jeecg-module-system/jeecg-system-start/target/zing-server.tar.gz -u zing-generic-1740848252537:5035b695f143240eef9553b6f62d9d990240c03a "https://ifboot-generic.pkg.coding.net/zingyang/zing-generic/zing-server?version=latest"
+        # - name: 完成
+        #   script: echo 发布完成
