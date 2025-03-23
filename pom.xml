@@ -7,11 +7,18 @@
     <groupId>com.zingyang</groupId>
     <artifactId>zing-ai</artifactId>
     <version>0.1</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
     <name>zing-ai</name>
     <description>AI application project</description>
-    <url>https://zingyang.com/ai</url>
 
+    <url>你的项目仓库地址</url>
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
@@ -19,25 +26,33 @@
         </license>
     </licenses>
 
-    <scm>
-        <connection>scm:git:https://your-repository-url.git</connection>
-        <developerConnection>scm:git:https://your-repository-url.git</developerConnection>
-        <url>https://your-repository-url</url>
-    </scm>
 
     <developers>
         <developer>
             <name>ZingYang</name>
-            <email>your.email@example.com</email>
+            <email>zingyang@icloud.com</email>
+            <organization>Sonatype</organization>
+            <organizationUrl>http://www.sonatype.com</organizationUrl>
         </developer>
     </developers>
 
+    <scm>
+        <connection>scm:git:https://github.com/zingyangcn/zing-ai.git</connection>
+        <developerConnection>scm:git:https://github.com/zingyangcn/zing-ai.git</developerConnection>
+        <url>https://github.com/zingyangcn/zing-ai.git</url>
+    </scm>
 
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+    <!--    发布地址-->
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2</url>
+        </repository>
+    </distributionManagement>
 
 
     <dependencies>
@@ -49,15 +64,68 @@
         </dependency>
     </dependencies>
 
-
     <!-- 配置发布仓库 -->
-    <distributionManagement>
-        <repository>
-            <!--必须与 settings.xml 的 id 一致-->
-            <id>zingyang-maven</id>
-            <name>zingyang-maven</name>
-            <url>https://maven.cnb.cool/zingyang/maven/-/packages/</url>
-        </repository>
-    </distributionManagement>
+    <build>
+        <plugins>
+            <!--    Maven插件发布    -->
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.4.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                    <tokenAuth>true</tokenAuth>
+                    <autoPublish>false</autoPublish>
+                </configuration>
+            </plugin>
 
+
+            <!--    签名插件        -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--     生成源文件       -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--     生成源javadocs文件       -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
 </project>

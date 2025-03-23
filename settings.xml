@@ -5,6 +5,11 @@
             <username>cnb</username>
             <password>4jVSP1c8dE4x1iQQffjamqOFJcG</password> <!-- 请替换为您的访问令牌 -->
         </server>
+        <server>
+            <id>central</id>
+            <username>nWH9AEY+</username>
+            <password>ZoztHuBp3VO7eZXH39/HMGzlKLZCcVY5mezglPfenH9G</password>
+        </server>
     </servers>
     <profiles>
         <profile>
