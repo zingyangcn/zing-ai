@@ -1,4 +1,4 @@
-package com.zing.annotation;
+package com.zingyang.annotation;
 
 
 import lombok.AllArgsConstructor;
